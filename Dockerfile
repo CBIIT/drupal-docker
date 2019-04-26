@@ -29,5 +29,6 @@ COPY resources/settings.php /tmp
 COPY resources/.htaccess /tmp
 RUN chmod 700 /usr/bin/run.sh
 EXPOSE 80
+ADD resources/.bashrc /root
 WORKDIR /local/drupal
 ENTRYPOINT run.sh

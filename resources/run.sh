@@ -1,4 +1,3 @@
-EXPORT PS1='[\[\e[1m\u\[\e[0m\]@$database:\[\e[1m\]\w\[\e[0m\]\$] '
 if [[ -z $repository ]]; then
     echo "Create new drupal site"
     composer create-project drupal-composer/drupal-project:8.x-dev /local/drupal/site --no-interaction
