@@ -9,7 +9,7 @@ RUN yum -y update \
     && yum-config-manager --enable remi-php73 \
     && yum install -y git php php-cli php-fpm php-mysqlnd \
        php-zip php-devel php-gd php-mcrypt php-mbstring php-curl \
-       php-xml php-pear php-bcmath php-json composer which vi mariadb
+       php-xml php-pear php-bcmath php-json composer which vi mariadb unzip
 
 # Install drush using composer/cgr #
 #RUN composer global require consolidation/cgr 
