@@ -9,11 +9,13 @@ else
         cd /local/drupal/site
         echo "pulling latest code from $repository"
         git pull
+        git config --global color.ui auto 
     else
         echo "Cloning code from $repository"
         git clone $repository site
         cd site
         composer require drush/drush
+        git config --global color.ui auto
     fi
     cp /tmp/settings.php /local/drupal/site/web/sites/default
     cp /tmp/.htaccess /local/drupal/site
