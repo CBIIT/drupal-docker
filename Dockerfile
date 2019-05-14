@@ -1,6 +1,6 @@
 FROM ncidockerhub.nci.nih.gov/cbiit/centos7_base
 
-ENV DRUPAL_VERSION=8.6.13
+ENV DRUPAL_VERSION=8.7.1
 
 # Update image #
 RUN yum -y update \
@@ -8,8 +8,8 @@ RUN yum -y update \
     && yum-config-manager --disable remi-php54 \
     && yum-config-manager --enable remi-php73 \
     && yum install -y git php php-cli php-fpm php-mysqlnd \
-       php-zip php-devel php-gd php-mcrypt php-mbstring php-curl \
-       php-xml php-pear php-bcmath php-json composer which vi mariadb unzip
+       php-zip php-devel php-gd php-mcrypt php-mbstring php-curl php-ldap \
+       php-xml php-pear php-bcmath php-json php-pecl-xdebug.x86_64 composer which vi mariadb unzip patch
 
 # Install drush using composer/cgr #
 #RUN composer global require consolidation/cgr 
