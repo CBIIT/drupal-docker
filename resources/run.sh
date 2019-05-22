@@ -9,6 +9,9 @@ else
         cd /local/drupal/site
         echo "pulling latest code from $repository"
         git pull
+        drush cim -y
+        drush cset ldap_servers.server.eventsldap address $ldap_address
+        drush cset ldap_servers.server.eventsldap port $ldap_port
         git config --global color.ui auto 
     else
         echo "Cloning code from $repository"
