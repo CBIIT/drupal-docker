@@ -9,7 +9,7 @@ RUN yum -y update \
     && yum-config-manager --enable remi-php73 \
     && yum install -y git php php-cli php-fpm php-mysqlnd \
        php-zip php-devel php-gd php-mcrypt php-mbstring php-curl php-ldap \
-       php-xml php-pear php-bcmath php-json php-pecl-xdebug.x86_64 composer which vi mariadb unzip patch
+       php-xml php-pear php-bcmath patch php-json php-pecl-xdebug.x86_64 composer which vi mariadb unzip patch openldap openldap-clients openldap-devel
 
 # Install drush using composer/cgr #
 #RUN composer global require consolidation/cgr 
