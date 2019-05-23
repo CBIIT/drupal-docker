@@ -16,6 +16,7 @@ RUN yum -y update \
 ENV PATH="/local/drupal/site/vendor/drush/drush:$PATH"
 #RUN cgr drush/drush:8.x
 
+
 # Get Drupal #
 RUN mkdir -p /local/drupal
 WORKDIR /local/drupal
