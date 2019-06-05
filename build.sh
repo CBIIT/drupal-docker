@@ -1,6 +1,5 @@
 #!/bin/bash
-TAG=`git log -1 --pretty=%ad --date=short`-`git log -1 --pretty=%h`
-
+TAG=`date +%F`-`git log -1 --pretty=%h`
 echo "building drupal image"
 docker build ./ -t temp_drupal
 
