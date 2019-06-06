@@ -24,4 +24,7 @@ else
     cp /tmp/.htaccess /local/drupal/site
 fi
 
+ln -sf /dev/stderr /var/log/httpd/error.log
+ln -sf /dev/stdout /var/log/httpd/access.log
+
 exec httpd -DFOREGROUND
