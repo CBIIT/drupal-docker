@@ -24,6 +24,7 @@ else
     cp /tmp/.htaccess /local/drupal/site
 fi
 
+echo "redirecting apache logs to /dev/stderr and /dev/stdout to allow them to show up in docker log"
 ln -sf /dev/stderr /var/log/httpd/error.log
 ln -sf /dev/stdout /var/log/httpd/access.log
 
