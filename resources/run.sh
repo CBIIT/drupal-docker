@@ -4,6 +4,7 @@ if [[ -z $repository ]]; then
     cd /local/drupal/site
     composer upgrade drupal/core:$DRUPAL_VERSION  --with-dependencie    
 else
+    echo "navigate to site directory"
     if [ -d "/local/drupal/site" ]; then
         echo "Skipping site download"
         cd /local/drupal/site
