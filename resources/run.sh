@@ -28,4 +28,5 @@ echo "redirecting apache logs to /dev/stderr and /dev/stdout to allow them to sh
 ln -sf /dev/stderr /var/log/httpd/error.log
 ln -sf /dev/stdout /var/log/httpd/access.log
 
+echo "start apache"
 exec httpd -DFOREGROUND
