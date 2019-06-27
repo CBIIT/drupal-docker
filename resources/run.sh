@@ -23,6 +23,8 @@ else
 
     cp /tmp/settings.php /local/drupal/site/web/sites/default
     cp /tmp/.htaccess /local/drupal/site
+    cp /tmp/services.yml /local/drupal/site/web/sites/default
+    
 fi
 
 echo "redirecting apache logs to /dev/stderr and /dev/stdout to allow them to show up in docker log"
