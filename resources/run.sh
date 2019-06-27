@@ -14,7 +14,7 @@ else
         echo "Cloning code from $repository"
         git clone $repository site
         cd site
-        composer require drush/drush
+        composer install
     fi
     drush cim -y
     drush cset ldap_servers.server.eventsldap address $ldap_address
