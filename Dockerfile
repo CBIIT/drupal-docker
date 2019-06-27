@@ -29,7 +29,9 @@ COPY resources/httpd.conf /etc/httpd/conf
 COPY resources/settings.php /tmp
 COPY resources/.htaccess /tmp
 COPY resources/ldap.conf /etc/openldap
+COPY resources/services.yml /tmp
 RUN chmod 700 /usr/bin/run.sh
+
 EXPOSE 80
 ADD resources/.bashrc /root
 WORKDIR /local/drupal
