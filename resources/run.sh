@@ -24,7 +24,10 @@ else
     cp /tmp/settings.php /local/drupal/site/web/sites/default
     cp /tmp/.htaccess /local/drupal/site
     cp /tmp/services.yml /local/drupal/site/web/sites/default
-    
+    if [ -d "/local/drupal/site/docker/apache" ];then
+ 	    echo "Adding addition apache config files"
+ 	    cp /local/drupal/site/docker/apache/* /etc/httpd/conf.d
+    fi
 fi
 
 echo "redirecting apache logs to /dev/stderr and /dev/stdout to allow them to show up in docker log"
