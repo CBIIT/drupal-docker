@@ -1,7 +1,7 @@
 #!/bin/bash
 TAG=`date +%F`-`git log -1 --pretty=%h`
 echo "building drupal image"
-docker build ./ -t temp_drupal
+docker build --no-cache ./ -t temp_drupal
 
 echo "tagging drupal image"
 docker tag temp_drupal:latest ncidockerhub.nci.nih.gov/webteam/drupal:$TAG
