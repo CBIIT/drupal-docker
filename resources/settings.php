@@ -2,20 +2,6 @@
 
 // @codingStandardsIgnoreFile
 
-/**
- * Setup s3fs
- */
-$settings['s3fs.access_key']=getenv('s3fs_access_key');
-$settings['s3fs.secret_key']=getenv('s3fs_secret_key');
-$config['s3fs.settings']['bucket']=getenv('s3fs_bucket');
-
-$settings['s3fs.use_s3_for_public']=FALSE;
-$settings['s3fs.use_s3_for_private']=TRUE;
-
-#$settings['file_private_path'] = '/'.getenv('project_name');
-$settings['file_private_path'] = '/';
-
-
 
 /**
  * @file
@@ -568,7 +554,7 @@ if ($settings['hash_salt']) {
  * See https://www.drupal.org/documentation/modules/file for more information
  * about securing private files.
  */
-#$settings['file_private_path'] = '/local/drupal/site/web/sites/default/files/private';
+$settings['file_private_path'] = '/local/drupal/site/web/sites/default/files/private';
 
 /**
  * Session write interval:
