@@ -13,7 +13,11 @@ else
     else
         echo "Cloning code from $repository"
         git clone $repository site
+        mkdir site
         cd site
+        git init
+        git remote add  origin $repository
+        git pull origin master
         composer install
     fi
     drush cim -y
