@@ -12,7 +12,6 @@ else
         git pull
     else
         echo "Cloning code from $repository"
-        git clone $repository site
         mkdir site
         cd site
         git init
