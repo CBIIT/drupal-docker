@@ -11,6 +11,7 @@ else
         echo "pulling latest code from $repository"
         git pull
     else
+        
         echo "Cloning code from $repository"
         mkdir site
         cd site
@@ -18,6 +19,16 @@ else
         git remote add  origin $repository
         git pull origin master
         composer install
+        echo "*Setting up directory permissions"
+        chown -R root:apache /local/drupal
+        echo "chmod -R 775 /local/drupal/site/web/sites/default/files"
+        chmod -R 775 /local/drupal/site/web/sites/default/files
+        echo "chmod -R 664 /local/drupal/site/web/sites/default/s*"
+        chmod 664 /local/drupal/site/web/sites/default/s*
+        echo "Create private directory /local/drupal/site/private-files"
+        mkdir /local/drupal/site/private-files
+        chown -R root:apache /local/drupal/site/private-files
+        chmod -R 664 /local/drupal/site/private-files
     fi
     #drush cim -y
     #drush cset ldap_servers.server.eventsldap address $ldap_address
