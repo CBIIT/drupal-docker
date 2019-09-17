@@ -19,10 +19,10 @@ else
         git pull origin master
         composer install
     fi
-    drush cim -y
-    drush cset ldap_servers.server.eventsldap address $ldap_address
-    drush cset ldap_servers.server.eventsldap port $ldap_port
-    git config --global color.ui auto
+    #drush cim -y
+    #drush cset ldap_servers.server.eventsldap address $ldap_address
+    #drush cset ldap_servers.server.eventsldap port $ldap_port
+    #git config --global color.ui auto
 
     cp /tmp/settings.php /local/drupal/site/web/sites/default
     cp /tmp/.htaccess /local/drupal/site
