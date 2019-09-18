@@ -19,6 +19,16 @@ else
         git remote add  origin $repository
         git pull origin master
         composer install
+        #echo "start apache"
+        #exec httpd -DFOREGROUND
+        #httpd -V
+        cp /tmp/settings.php /local/drupal/site/web/sites/default
+        cp /tmp/.htaccess /local/drupal/site
+        cp /tmp/services.yml /local/drupal/site/web/sites/default
+        if [ -d "/local/drupal/site/docker/apache" ];then
+            echo "Adding addition apache config files"
+            cp /local/drupal/site/docker/apache/* /etc/httpd/conf.d
+        fi        
         echo "*Setting up directory permissions"
         chown -R root:apache /local/drupal
         echo "chmod -R 775 /local/drupal/site/web/sites/default/files"
@@ -29,12 +39,23 @@ else
         mkdir /local/drupal/site/private-files
         chown -R root:apache /local/drupal/site/private-files
         chmod -R 664 /local/drupal/site/private-files
-    fi
-    #drush cim -y
-    #drush cset ldap_servers.server.eventsldap address $ldap_address
-    #drush cset ldap_servers.server.eventsldap port $ldap_port
-    #git config --global color.ui auto
+        echo ""
+        echo "Adding drush commands in run.sh"
+        cd /local/drupal/site
+        echo "* Load Database"
+        drush sql-cli < /local/drupal/site/database.sql
 
+        echo "Peform this after loading database or importing config"
+        echo ""
+        echo "* Setting up ldap server and port, turning on ldap_authentication"
+        drush cset ldap_servers.server.nci address $ldap_address -y
+        drush cset ldap_servers.server.nci port $ldap_port -y
+        echo "* Enable ldap_authentication"
+        drush pm-enable ldap_authentication -y
+        
+
+    fi
+    
     cp /tmp/settings.php /local/drupal/site/web/sites/default
     cp /tmp/.htaccess /local/drupal/site
     cp /tmp/services.yml /local/drupal/site/web/sites/default
@@ -42,6 +63,7 @@ else
  	    echo "Adding addition apache config files"
  	    cp /local/drupal/site/docker/apache/* /etc/httpd/conf.d
     fi
+
 fi
 
 echo "redirecting apache logs to /dev/stderr and /dev/stdout to allow them to show up in docker log"
