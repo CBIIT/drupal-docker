@@ -52,10 +52,10 @@ else
         drush cset ldap_servers.server.nci port $ldap_port -y
         echo "* Enable ldap_authentication"
         drush pm-enable ldap_authentication -y
-        
+        drush cset ldap_authentication.settings sids.nci nci -y
 
     fi
-    
+
     cp /tmp/settings.php /local/drupal/site/web/sites/default
     cp /tmp/.htaccess /local/drupal/site
     cp /tmp/services.yml /local/drupal/site/web/sites/default
