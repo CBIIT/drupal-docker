@@ -11,7 +11,12 @@ else
         echo "pulling latest code from $repository"
         git pull
     else
-        
+        echo "Adding drupaldocker user"
+        groupadd -g 3000 drupaldocker
+        useradd -c "" -d /home/drupaldocker -s /bin/bash -g 3000 -u 3000 drupaldocker
+        usermod -G apache drupaldocker
+        usermod -G drupaldocker apache
+
         echo "Cloning code from $repository"
         mkdir site
         cd site
@@ -30,14 +35,16 @@ else
             cp /local/drupal/site/docker/apache/* /etc/httpd/conf.d
         fi        
         echo "*Setting up directory permissions"
-        chown -R root:apache /local/drupal
+        #chown -R root:apache /local/drupal
+        chown -R drupaldocker:drupaldocker /local/drupal
+
         echo "chmod -R 775 /local/drupal/site/web/sites/default/files"
         chmod -R 775 /local/drupal/site/web/sites/default/files
         echo "chmod -R 664 /local/drupal/site/web/sites/default/s*"
         chmod 664 /local/drupal/site/web/sites/default/s*
         echo "Create private directory /local/drupal/site/private-files"
         mkdir /local/drupal/site/private-files
-        chown -R root:apache /local/drupal/site/private-files
+        chown -R drupaldocker:drupaldocker /local/drupal/site/private-files
         chmod -R 664 /local/drupal/site/private-files
         echo ""
         echo "Adding drush commands in run.sh"
@@ -53,6 +60,7 @@ else
         echo "* Enable ldap_authentication"
         drush pm-enable ldap_authentication -y
         drush cset ldap_authentication.settings sids.nci nci -y
+        setup/setup_prod.sh
 
     fi
 
