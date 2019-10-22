@@ -14,8 +14,8 @@ else
         echo "Adding drupaldocker user"
         groupadd -g 3000 drupaldocker
         useradd -c "" -d /home/drupaldocker -s /bin/bash -g 3000 -u 3000 drupaldocker
-        usermod -G apache drupaldocker
-        usermod -G drupaldocker apache
+        #usermod -G apache drupaldocker
+        #usermod -G drupaldocker apache
 
         echo "Cloning code from $repository"
         mkdir site
