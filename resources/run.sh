@@ -46,6 +46,10 @@ else
         mkdir /local/drupal/site/private-files
         chown -R drupaldocker:drupaldocker /local/drupal/site/private-files
         chmod -R 664 /local/drupal/site/private-files
+        echo "Create tmp directory /local/drupal/tmp"
+        mkdir /local/drupal/tmp
+        chown -R drupaldocker:drupaldocker /local/drupal/tmp
+        chmod -R 775 /local/drupal/tmp
         echo ""
         echo "Adding drush commands in run.sh"
         cd /local/drupal/site
@@ -66,7 +70,10 @@ else
 
     cp /tmp/settings.php /local/drupal/site/web/sites/default
     cp /tmp/.htaccess /local/drupal/site
+    cp /tmp/.htaccess /local/drupal/tmp
     cp /tmp/services.yml /local/drupal/site/web/sites/default
+    chmod 644 /local/drupal/site/web/sites/default/setting.php /local/drupal/site/web/sites/default/services.yml /local/drupal/tmp/.htaccess
+
     if [ -d "/local/drupal/site/docker/apache" ];then
  	    echo "Adding addition apache config files"
  	    cp /local/drupal/site/docker/apache/* /etc/httpd/conf.d
