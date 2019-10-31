@@ -15,3 +15,4 @@ echo "removing images from system"
 docker rmi temp_drupal:latest
 docker rmi ncidockerhub.nci.nih.gov/webteam/drupal:$TAG
 
+docker image prune -f
