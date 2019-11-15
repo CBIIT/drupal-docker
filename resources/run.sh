@@ -22,10 +22,8 @@ else
         cd site
         git init
         git remote add  origin $repository
-        git pull origin master
-        git pull
         branchOrTag="${CONTAINER_BRANCH_OR_TAG/origin\//}"
-        git checkout $branchOrTag
+        git pull origin $branchOrTag
         composer install
         #echo "start apache"
         #exec httpd -DFOREGROUND
