@@ -1,5 +1,5 @@
 #!/bin/bash
-TAG=`date +%F`-`git log -1 --pretty=%h`
+TAG="${1/origin\//}"
 echo "building drupal image"
 docker build --no-cache ./ -t temp_drupal
 
