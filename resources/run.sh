@@ -22,7 +22,7 @@ else
         cd site
         git init
         git remote add  origin $repository
-        branchOrTag="${CONTAINER_BRANCH_OR_TAG/origin\//}"
+        branchOrTag="${CONTAINER_BRANCH_OR_TAG/origin1\//}"
         git pull origin $branchOrTag
         composer install
         #echo "start apache"
