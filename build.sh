@@ -1,5 +1,6 @@
 #!/bin/bash
 TAG="${1/origin\//}"
+echo $TAG
 echo "building drupal image"
 docker build --no-cache ./ -t temp_drupal
 
