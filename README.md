@@ -48,3 +48,4 @@ There are two options to build and run docker from the command line
 # To remove image
 1. Make sure all containers are stopped and removed referencing image
 2. Run **docker rmi cbiit/drupal**
+
