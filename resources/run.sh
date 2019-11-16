@@ -22,7 +22,7 @@ else
         cd site
         git init
         git remote add  origin $repository
-        branchOrTag=$CONTAINER_BRANCH_OR_TAG | sed -e 's/origin\(.*\)\///'
+        branchOrTag="${CONTAINER_BRANCH_OR_TAG/origin*\//}"
         echo "#####"$branchOrTag"####"
         git pull origin $branchOrTag
         composer install
