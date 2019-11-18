@@ -25,6 +25,8 @@ else
         branchOrTag="${CONTAINER_BRANCH_OR_TAG/origin*\//}"
         echo "#####"$branchOrTag"####"
         git pull origin $branchOrTag
+        git pull
+        git checkout $branchOrTag
         composer install
         #echo "start apache"
         #exec httpd -DFOREGROUND
