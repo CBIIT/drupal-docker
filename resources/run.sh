@@ -57,8 +57,12 @@ else
         echo ""
         echo "Adding drush commands in run.sh"
         cd /local/drupal/site
-        echo "* Load Database"
-        drush sql-cli < /local/drupal/site/database.sql
+        if [[ ! -z $load_database ]]; then
+            echo "* Load Database"
+            drush sql-cli < /local/drupal/site/database.sql
+        else
+            echo "* Skipping Database Load"
+        fi
 
         echo "Peform this after loading database or importing config"
         echo ""
