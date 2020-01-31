@@ -80,7 +80,7 @@ else
     cp /tmp/.htaccess /local/drupal/site
     cp /tmp/.htaccess /local/drupal/tmp
     cp /tmp/services.yml /local/drupal/site/web/sites/default
-    chmod 644 /local/drupal/site/web/sites/default/setting.php /local/drupal/site/web/sites/default/services.yml /local/drupal/tmp/.htaccess
+    chmod 644 /local/drupal/site/web/sites/default/settings.php /local/drupal/site/web/sites/default/services.yml /local/drupal/tmp/.htaccess
 
     if [ -d "/local/drupal/site/docker/apache" ];then
  	    echo "Adding addition apache config files"
