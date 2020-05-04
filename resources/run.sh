@@ -38,6 +38,13 @@ else
             echo "Adding addition apache config files"
             cp /local/drupal/site/docker/apache/* /etc/httpd/conf.d
         fi        
+        # name the cron job file drupal.cron #
+        if [ -d "/local/drupal/site/docker/cron" ];then
+            echo "Adding cronjob file"
+            cp /local/drupal/site/docker/cron/drupal.cron /etc/cron.d
+            chmod 0644 /etc/cron.d/drupal.cron
+            crontab /etc/cron.d/drupal.cron
+        fi        
         echo "*Setting up directory permissions"
         #chown -R root:apache /local/drupal
         chown -R drupaldocker:drupaldocker /local/drupal
