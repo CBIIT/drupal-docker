@@ -44,9 +44,6 @@ else
             cp /local/drupal/site/docker/cron/drupal.cron /etc/cron.d
             chmod 0644 /etc/cron.d/drupal.cron
             crontab /etc/cron.d/drupal.cron
-            echo "starting crond"
-            crond && tail -f /dev/null &
-            echo "done starting crond"
         fi        
         echo "*Setting up directory permissions"
         #chown -R root:apache /local/drupal
@@ -102,6 +99,10 @@ fi
 echo "redirecting apache logs to /dev/stderr and /dev/stdout to allow them to show up in docker log"
 ln -sf /dev/stderr /var/log/httpd/error.log
 ln -sf /dev/stdout /var/log/httpd/access.log
+
+echo "starting crond"
+crond && tail -f /dev/null &
+echo "done starting crond"
 
 echo "start apache"
 exec httpd -DFOREGROUND
