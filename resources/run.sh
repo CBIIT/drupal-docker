@@ -44,6 +44,9 @@ else
             cp /local/drupal/site/docker/cron/drupal.cron /etc/cron.d
             chmod 0644 /etc/cron.d/drupal.cron
             crontab /etc/cron.d/drupal.cron
+            echo "starting crond"
+            crond && tail -f /dev/null &
+            echo "done starting crond"
         fi        
         echo "*Setting up directory permissions"
         #chown -R root:apache /local/drupal
