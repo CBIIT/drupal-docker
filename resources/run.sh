@@ -67,7 +67,7 @@ else
         echo ""
         echo "Adding drush commands in run.sh"
         cd /local/drupal/site
-        if [[ ! -z $load_database ]]; then
+        if [[ -z $load_database ]]; then
             echo "* Load Database"
             drush sql-cli < /local/drupal/site/database.sql
         else
