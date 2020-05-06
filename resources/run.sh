@@ -26,6 +26,9 @@ else
         echo "#####"$branchOrTag"####"
         git pull origin $branchOrTag
         git pull
+        git config --global user.email "you@example.com"
+        git config --global user.name "Your Name"
+        git stash
         git checkout $branchOrTag
         composer install
         #echo "start apache"
