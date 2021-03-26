@@ -15,8 +15,8 @@ RUN yum -y install yum-utils wget http://rpms.remirepo.net/enterprise/remi-relea
 
 RUN cd /etc/yum.repos.d
 RUN wget https://repo.codeit.guru/codeit.el`rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release)`.repo
-RUN yum remove httpd
-RUN yum install httpd
+RUN -y yum remove httpd
+RUN -y yum install httpd
        
 # Install drush using composer/cgr #
 #RUN composer global require consolidation/cgr 
