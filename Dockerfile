@@ -4,8 +4,10 @@ ENV DRUPAL_VERSION=8.7.1
 
 # Update image #
 RUN yum -y update \
-    && yum -y install yum-utils wget http://rpms.remirepo.net/enterprise/remi-release-7.rpm epel-release yum-utils \
-    && yum-config-manager --disable remi-php54 \
+    && yum -y install yum-utils wget epel-release yum-utils
+RUN cd /etc/yum.repos.d
+RUN wget https://repo.codeit.guru/codeit.el`rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release)`.repo
+RUN yum -y install yum-config-manager --disable remi-php54 \
     && yum-config-manager --enable remi-php73 \
     && yum install -y cronie git php php-opcache php-cli php-fpm php-mysqlnd \
        php-zip php-devel php-gd php-mcrypt php-mbstring php-curl php-ldap \
