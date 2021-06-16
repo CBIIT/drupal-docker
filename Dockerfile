@@ -36,6 +36,8 @@ COPY resources/settings.php /tmp
 COPY resources/.htaccess /tmp
 COPY resources/ldap.conf /etc/openldap
 COPY resources/services.yml /tmp
+COPY resources/newdatabase8.9.16.sql /tmp
+
 RUN chmod 700 /usr/bin/run.sh
 
 EXPOSE 80
