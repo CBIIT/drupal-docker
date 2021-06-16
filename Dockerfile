@@ -1,4 +1,4 @@
-FROM ncidockerhub.nci.nih.gov/cbiit/centos7_base
+FROM cbiit/centos7_base
 
 ENV DRUPAL_VERSION=8.7.1
 

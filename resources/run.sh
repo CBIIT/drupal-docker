@@ -3,7 +3,9 @@ if [[ -z $repository ]]; then
     echo "Adding drupaldocker user"
     groupadd -g 3000 drupaldocker
     useradd -c "" -d /home/drupaldocker -s /bin/bash -g 3000 -u 3000 drupaldocker
-    composer create-project drupal-composer/drupal-project:8.x-dev /local/drupal/site --no-interaction
+    composer create-project drupal/recommended-project:8.9.16 site
+
+    #composer create-project drupal-composer/drupal-project:8.x-dev /local/drupal/site --no-interaction
     cd /local/drupal/site
     chown -R drupaldocker:drupaldocker /local/drupal
     composer upgrade drupal/core:$DRUPAL_VERSION  --with-dependencies
