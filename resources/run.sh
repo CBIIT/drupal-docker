@@ -6,7 +6,8 @@ if [[ -z $repository ]]; then
     composer create-project drupal/recommended-project:8.9.16 site
 
     #composer create-project drupal-composer/drupal-project:8.x-dev /local/drupal/site --no-interaction
-    cd /local/drupal/site
+    cd /local/drupal/site        
+    cp /tmp/settings.php /local/drupal/site/web/sites/default
     chown -R drupaldocker:drupaldocker /local/drupal
     composer upgrade drupal/core:$DRUPAL_VERSION  --with-dependencies
 
