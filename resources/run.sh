@@ -7,7 +7,7 @@ if [[ -z $repository ]]; then
 
     #composer create-project drupal-composer/drupal-project:8.x-dev /local/drupal/site --no-interaction
     cd /local/drupal/site        
-    composer require drush/drush
+    php -d memory_limit=-1 /usr/bin/composer require drush/drush
     cp /tmp/settings.php /local/drupal/site/web/sites/default
     chown -R drupaldocker:drupaldocker /local/drupal
     composer upgrade drupal/core:$DRUPAL_VERSION  --with-dependencies
