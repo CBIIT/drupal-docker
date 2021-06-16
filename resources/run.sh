@@ -8,7 +8,9 @@ if [[ -z $repository ]]; then
     #composer create-project drupal-composer/drupal-project:8.x-dev /local/drupal/site --no-interaction
     cd /local/drupal/site        
     php -d memory_limit=-1 /usr/bin/composer require drush/drush
+    echo "loading database"
     drush sql-cli < /tmp/newdatabase8.9.16.sql
+    echo "end loading database"
     cp /tmp/settings.php /local/drupal/site/web/sites/default
     chown -R drupaldocker:drupaldocker /local/drupal
 
