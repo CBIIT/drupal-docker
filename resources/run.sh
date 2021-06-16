@@ -10,7 +10,6 @@ if [[ -z $repository ]]; then
     php -d memory_limit=-1 /usr/bin/composer require drush/drush
     cp /tmp/settings.php /local/drupal/site/web/sites/default
     chown -R drupaldocker:drupaldocker /local/drupal
-    composer upgrade drupal/core:$DRUPAL_VERSION  --with-dependencies
 
 else
     echo "navigate to site directory"
