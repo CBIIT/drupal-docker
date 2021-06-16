@@ -1,13 +1,13 @@
 if [[ -z $repository ]]; then
     echo "Create new drupal site"
-    composer create-project drupal-composer/drupal-project:8.x-dev /local/drupal/site --no-interaction
-    cd /local/drupal/site
-    composer upgrade drupal/core:$DRUPAL_VERSION  --with-dependencies
     echo "Adding drupaldocker user"
     groupadd -g 3000 drupaldocker
     useradd -c "" -d /home/drupaldocker -s /bin/bash -g 3000 -u 3000 drupaldocker
-        #usermod -G apache drupaldocker
-        #usermod -G drupaldocker apache    
+    composer create-project drupal-composer/drupal-project:8.x-dev /local/drupal/site --no-interaction
+    cd /local/drupal/site
+    chown -R drupaldocker:drupaldocker /local/drupal
+    composer upgrade drupal/core:$DRUPAL_VERSION  --with-dependencies
+
 else
     echo "navigate to site directory"
     if [ -d "/local/drupal/site/vendor" ]; then
