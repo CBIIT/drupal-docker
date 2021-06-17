@@ -6,7 +6,7 @@ if [[ -z $repository ]]; then
     composer create-project drupal/recommended-project:8.9.16 site
 
     #composer create-project drupal-composer/drupal-project:8.x-dev /local/drupal/site --no-interaction
-    cd /local/drupal/site        
+    cd /local/drupal        
     php -d memory_limit=-1 /usr/bin/composer global require drush/drush:dev-master
     echo "loading database"
     drush sql-cli < /tmp/newdatabase8.9.16.sql
