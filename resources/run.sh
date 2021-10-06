@@ -3,12 +3,14 @@ if [[ -z $repository ]]; then
     echo "Adding drupaldocker user"
     groupadd -g 3000 drupaldocker
     useradd -c "" -d /home/drupaldocker -s /bin/bash -g 3000 -u 3000 drupaldocker
-    composer create-project drupal/recommended-project:8.9.16 site
+    composer create-project drupal/recommended-project:9.2.6 site
 
     #composer create-project drupal-composer/drupal-project:8.x-dev /local/drupal/site --no-interaction
     cd /local/drupal/site        
     echo "installing drush"
-    php -d memory_limit=-1 /usr/bin/composer require drush/drush:dev-master
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    php composer-setup.php --install-dir=/usr/bin --filename=composer
+    composer require drush/drush:^10
     echo "end installing drush"
     echo "loading database"
     #drush sql-cli < /tmp/newdatabase8.9.16.sql
