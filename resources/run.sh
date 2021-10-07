@@ -15,6 +15,7 @@ if [[ -z $repository ]]; then
     echo "loading database"
     #drush sql-cli < /tmp/newdatabase8.9.16.sql
     echo "end loading database"
+    #drush si standard —-db-url=mysql://dbuser:dbpassword@server:3306/drpual9 --site-name=testDrupal9  --account-name=admin --account-pass=admin123 --site-mail=seinolf@gmail.com
     cp /tmp/settings.php /local/drupal/site/web/sites/default
     chown -R drupaldocker:drupaldocker /local/drupal
 
