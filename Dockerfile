@@ -16,7 +16,7 @@ RUN apk add bash git nano tmux sudo curl openssh php7-apache2 php7-json php7-dom
 COPY ./resources/httpd_alpine.conf /etc/apache2/httpd.conf
 COPY ./resources/run.sh /usr/bin
 RUN chmod 700 /usr/bin/run.sh
-
+RUN chown -R apache:apache /opt/drupal/web/sites
 ENTRYPOINT run.sh
 
 
