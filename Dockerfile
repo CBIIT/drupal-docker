@@ -1,18 +1,31 @@
 FROM drupal:9.2.7-php7.4-fpm-alpine3.14
 ENV DRUPAL_VERSION=9.2.6
-
+ENV PHP_VERSION=7
 RUN sh
 RUN chmod 1777 /tmp
 RUN chmod -R 1777 /var/tmp
 RUN rm -rf /var/lib/apt/lists/*
 
 # update sources list
-RUN apk update && apk upgrade
-RUN apk add ca-certificates wget && update-ca-certificates
+RUN apk update
+RUN apk add --no-cache ca-certificates wget && update-ca-certificates
 
 # install basic apps, one per line for better caching
-RUN apk add bash git nano tmux sudo curl openssh php7-apache2 apache2-utils php7-json php7-dom php7-gd php7-opcache php7-mbstring php7-pdo php7-session php7-simplexml php7-xml php7-pdo_mysql php7-tokenizer
-
+RUN apk --no-cache add bash curl git openssh nano sudo tmux \
+    php${PHP_VERSION}-apache2 \
+    php${PHP_VERSION}-dom \
+    php${PHP_VERSION}-gd \
+    php${PHP_VERSION}-json \
+    php${PHP_VERSION}-mbstring \
+    php${PHP_VERSION}-opcache \
+    php${PHP_VERSION}-pdo \
+    php${PHP_VERSION}-pdo_mysql \
+    php${PHP_VERSION}-session \
+    php${PHP_VERSION}-simplexml \
+    php${PHP_VERSION}-tokenizer \
+    php${PHP_VERSION}-xml \
+    apache2-utils
+          
 COPY ./resources/httpd.conf /etc/apache2/httpd.conf
 COPY ./resources/run.sh /usr/bin
 COPY ./resources/000-default.conf /etc/apache2/conf.d
