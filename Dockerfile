@@ -1,42 +1,32 @@
-FROM ncidockerhub.nci.nih.gov/cbiit/centos7_base
-
+FROM drupal:9.2.7-php7.4-fpm-alpine3.14
 ENV DRUPAL_VERSION=9.2.6
 
-# Update image #
-RUN yum -y update \
-    && yum -y install epel-release yum-utils wget
+RUN sh
+RUN chmod 1777 /tmp
+RUN chmod -R 1777 /var/tmp
+RUN rm -rf /var/lib/apt/lists/*
 
-RUN yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm \
-    && yum-config-manager --disable remi-php54 \
-    && yum-config-manager --enable remi-php74 \
-    && yum install -y cronie git php php-opcache php-cli php-fpm php-mysqlnd \
-       php-zip php-devel php-gd php-mcrypt php-mbstring php-curl php-ldap \
-       php-xml php-pear php-bcmath patch php-json php-pecl-xdebug.x86_64 composer which vi mariadb unzip patch openldap openldap-clients openldap-devel
+# update sources list
+RUN apk update && apk upgrade
+RUN apk add ca-certificates wget && update-ca-certificates
 
-# Install drush using composer/cgr #
-#RUN composer global require consolidation/cgr 
-ENV PATH="/local/drupal/site/vendor/drush/drush:$PATH"
-#RUN cgr drush/drush:8.x
+# install basic apps, one per line for better caching
+RUN apk add  git
+RUN apk add  nano
+RUN apk add  tmux
+RUN apk add  sudo
+RUN apk add  curl
+RUN apk add  openssh
+RUN apk add  bash
+RUN apk add php7-apache2
+RUN apk add php7-json
+RUN apk add php7-dom
+RUN apk add php7-gd
+RUN apk add php7-pdo
+RUN apk add php7-session
+RUN apk add php7-simplexml
+RUN apk add php7-xml
+RUN apk add php7-pdo_mysql
+RUN apk add php7-tokenizer
+ADD ./resources/httpd_alpine.conf /etc/apache2/httpd.conf
 
-
-# Get Drupal #
-RUN mkdir -p /local/drupal
-WORKDIR /local/drupal
-#RUN drush dl drupal-$DRUPAL_VERSION --drupal-project-rename="site"
-
-# COPY main resouces over #
-COPY resources/run.sh /usr/bin
-COPY resources/000-default.conf /etc/httpd/conf.d
-COPY resources/httpd.conf /etc/httpd/conf
-COPY resources/settings.php /tmp
-COPY resources/.htaccess /tmp
-COPY resources/ldap.conf /etc/openldap
-COPY resources/services.yml /tmp
-COPY resources/newdatabase8.9.16.sql /tmp
-
-RUN chmod 700 /usr/bin/run.sh
-
-EXPOSE 80
-ADD resources/.bashrc /root
-WORKDIR /local/drupal
-ENTRYPOINT run.sh
