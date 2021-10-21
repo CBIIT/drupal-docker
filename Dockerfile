@@ -11,10 +11,11 @@ RUN apk update && apk upgrade
 RUN apk add ca-certificates wget && update-ca-certificates
 
 # install basic apps, one per line for better caching
-RUN apk add bash git nano tmux sudo curl openssh php7-apache2 php7-json php7-dom php7-gd php7-pdo php7-session php7-simplexml php7-xml php7-pdo_mysql php7-tokenizer
+RUN apk add bash git nano tmux sudo curl openssh php7-apache2 apache2-utils php7-json php7-dom php7-gd php7-opcache php7-mbstring php7-pdo php7-session php7-simplexml php7-xml php7-pdo_mysql php7-tokenizer
 
-COPY ./resources/httpd_alpine.conf /etc/apache2/httpd.conf
+COPY ./resources/httpd.conf /etc/apache2/httpd.conf
 COPY ./resources/run.sh /usr/bin
+COPY ./resources/000-default.conf /etc/apache2/conf.d
 RUN chmod 700 /usr/bin/run.sh
 RUN chown -R apache:apache /opt/drupal/web/sites
 ENTRYPOINT run.sh

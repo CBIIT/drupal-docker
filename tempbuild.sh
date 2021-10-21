@@ -2,4 +2,6 @@
 docker kill alpine
 docker rm alpine
 docker build --no-cache  ./ -t alpine
-docker run --rm -d --name alpine -p 8081:80 alpine  
+docker run -d --name alpine -p 8081:80 alpine  
+#docker run -it --entrypoint bash -d --name alpine -p 8081:80 alpine
+
