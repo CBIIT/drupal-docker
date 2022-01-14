@@ -1,4 +1,4 @@
-FROM drupal:9.2.7-php7.4-fpm-alpine3.14
+FROM drupal:9.3.2-php7.4-fpm-alpine3.14
 ENV DRUPAL_VERSION=9.2.6
 ENV PHP_VERSION=7
 RUN sh
