@@ -11,6 +11,6 @@ sitename="${sitename:-default}"
 
 drush si --db-url=mysql://$dbuser:$dbpass@$dbhost:$dbport/$dbname --site-name=$sitename --account-name=$user --account-pass=$pass
     
-chown -R apache:apache /opt/drupal/web/sites/default
+chown -R apache:apache /opt/drupal
 #Start Apache
 exec httpd -DFOREGROUND
