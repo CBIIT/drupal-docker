@@ -1,5 +1,5 @@
 #!/bin/bash
-TAG="1.1.13"
+TAG=$image_branch_or_tag
 echo $TAG
 echo "building drupal image"
 docker build --no-cache  ./ -t temp_drupal
