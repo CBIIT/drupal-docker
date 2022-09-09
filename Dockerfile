@@ -13,8 +13,9 @@ RUN yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm \
        php-zip php-devel php-gd php-mcrypt php-mbstring php-curl php-ldap \
        php-xml php-pear php-bcmath patch php-json php-pecl-xdebug.x86_64 composer which vi mariadb unzip patch openldap openldap-clients openldap-devel
 
-cd /etc/yum.repos.d && wget https://repo.codeit.guru/codeit.el`rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release)`.repo
-yum -y install httpd
+WORKDIR /etc/yum.repos.d
+RUN wget https://repo.codeit.guru/codeit.el`rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release)`.repo
+RUN yum -y install httpd
 
 # Install drush using composer/cgr #
 #RUN composer global require consolidation/cgr 
