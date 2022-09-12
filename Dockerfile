@@ -1,4 +1,4 @@
-FROM ncidockerhub.nci.nih.gov/cbiit/centos7_base
+FROM centos:7
 
 ENV DRUPAL_VERSION=9.2.6
 
@@ -16,7 +16,9 @@ RUN yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm \
 WORKDIR /etc/yum.repos.d
 RUN wget https://repo.codeit.guru/codeit.el`rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release)`.repo
 RUN yum -y install httpd
-
+RUN yum -y update rsync
+RUN yum -y install libgudev1
+ 
 # Install drush using composer/cgr #
 #RUN composer global require consolidation/cgr 
 ENV PATH="/local/drupal/site/vendor/drush/drush:$PATH"
