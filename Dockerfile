@@ -42,7 +42,7 @@ RUN chmod 700 /usr/bin/run.sh
 WORKDIR /opt/drupal
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php --install-dir=/usr/bin --filename=composer
-RUN composer require drush/drush:^10 --prefer-dist
+RUN composer --no-interaction require drush/drush:^10 --prefer-dist
 WORKDIR /opt/drupal/web
 
 ENTRYPOINT run.sh
