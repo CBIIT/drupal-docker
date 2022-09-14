@@ -2,18 +2,17 @@ version: '2'
 services:
   drupal-server:
     container_name: drupal-server
-    image: ncidockerhub.nci.nih.gov/webteam/drupal
+    image: alpine
+    build: .
     ports:
      - "8080:80"
     environment:
-      repository: $repository
-      hash_salt: $hash_salt
-      database: $database
-      username: $username
-      password: $password
-      host: $host
-      port: $port
-      namespace: $namespace
-      driver: $driver
-
+      sitename: webteam
+      dbhost: 192.168.0.170
+      dbport: 55002
+      dbuser: mysql
+      dbpass: 1234
+      dbname: webteam
+      user: admin
+      pass: 1234
 
