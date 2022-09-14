@@ -1,4 +1,4 @@
-FROM drupal:9.3.2-php8.0-fpm-alpine3.14
+FROM drupal:9.3.13-php8.1-fpm-alpine3.14
 ENV DRUPAL_VERSION=9.3.2
 ENV PHP_VERSION=8
 RUN sh
@@ -32,17 +32,19 @@ RUN apk --no-cache add bash \
     php${PHP_VERSION}-tokenizer \
     php${PHP_VERSION}-xml \
     apache2-utils
-          
+
 COPY ./resources/httpd.conf /etc/apache2/httpd.conf
 COPY ./resources/run.sh /usr/bin
 COPY ./resources/000-default.conf /etc/apache2/conf.d
-
 COPY ./resources/.htaccess /opt/drupal
 RUN chmod 700 /usr/bin/run.sh
 WORKDIR /opt/drupal
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php --install-dir=/usr/bin --filename=composer
+COPY ./resources/composer.json /opt/drupal
+
 RUN composer --no-interaction require drush/drush:^10 --prefer-dist
+RUN composer --no-interaction update
 WORKDIR /opt/drupal/web
 
 ENTRYPOINT run.sh
