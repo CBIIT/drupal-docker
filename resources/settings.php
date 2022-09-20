@@ -555,7 +555,7 @@ if ($settings['hash_salt']) {
  * about securing private files.
  */
 //$settings['file_private_path'] = '/local/drupal/site/private-files';
-$settings['file_private_path'] = '/mnt/s3fs';
+$settings['file_private_path'] = '/tmp';
 
 /**
  * Session write interval:
@@ -744,7 +744,7 @@ $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
  *   '^.+\.example\.com$',
  *   '^example\.org$',
  *   '^.+\.example\.org$',
- * ); * 
+ * ); *
  * @endcode
  * will allow the site to run off of all variants of example.com and
  * example.org, with all subdomains included.
@@ -752,6 +752,7 @@ $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
 $settings['trusted_host_patterns'] = array(
   '^nci\.nih\.gov$',
   '^.+\.nci\.nih\.gov$',
+  '^localhost$'
 );
 /**
  * The default list of directories that will be ignored by Drupal's file API.

@@ -17,3 +17,4 @@ services:
       driver: $driver
 
 
+docker compose run -e DEBUG=1 web python console.py

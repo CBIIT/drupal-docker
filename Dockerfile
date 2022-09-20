@@ -18,9 +18,9 @@ RUN wget https://repo.codeit.guru/codeit.el`rpm -q --qf "%{VERSION}" $(rpm -q --
 RUN yum -y install httpd
 RUN yum -y update rsync
 RUN yum -y install libgudev1
- 
+
 # Install drush using composer/cgr #
-#RUN composer global require consolidation/cgr 
+#RUN composer global require consolidation/cgr
 ENV PATH="/local/drupal/site/vendor/drush/drush:$PATH"
 #RUN cgr drush/drush:8.x
 
@@ -39,10 +39,13 @@ COPY resources/.htaccess /tmp
 COPY resources/ldap.conf /etc/openldap
 COPY resources/services.yml /tmp
 COPY resources/newdatabase8.9.16.sql /tmp
-
+COPY resources/nci-cct-eventsreg.zip /tmp
+COPY resources/php.ini /etc
 RUN chmod 700 /usr/bin/run.sh
-
+WORKDIR /tmp
+RUN unzip nci-cct-eventsreg.zip
 EXPOSE 80
 ADD resources/.bashrc /root
 WORKDIR /local/drupal
 ENTRYPOINT run.sh
+
