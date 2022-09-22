@@ -1,20 +1,19 @@
 version: '2'
 services:
   drupal-server:
-    container_name: drupal-server
-    image: ncidockerhub.nci.nih.gov/webteam/drupal
+    container_name: events
+    image: drupal-server
+    network_mode: bridge
+    external_links:
+      - mysql57:db
     ports:
      - "8080:80"
     environment:
-      repository: $repository
-      hash_salt: $hash_salt
-      database: $database
-      username: $username
-      password: $password
-      host: $host
-      port: $port
-      namespace: $namespace
-      driver: $driver
-
-
-docker compose run -e DEBUG=1 web python console.py
+      hash_salt: paxwBNh8p2uVhxb0zRaLrB_vTsme3iG3rEeE1ABh9SxFhnkSmG56ezeqBeK995f
+      database: events
+      username: root
+      password: my-secret-pw
+      host: db
+      port: 3306
+      namespace:
+      driver: mysql

@@ -1,6 +1,6 @@
 parameters:
   session.storage.options:
-    cookie_domain: 'nci.nih.gov'
+    cookie_domain: 'localhost'
     # Default ini options for sessions.
     #
     # Some distributions of Linux (most notably Debian) ship their PHP
