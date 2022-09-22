@@ -14,6 +14,6 @@ services:
       username: root
       password: my-secret-pw
       host: db
-      port: 3306
+      port: 3308
       namespace:
       driver: mysql
