@@ -752,6 +752,7 @@ $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
 $settings['trusted_host_patterns'] = array(
   '^nci\.nih\.gov$',
   '^.+\.nci\.nih\.gov$',
+  '^localhost$'
 );
 /**
  * The default list of directories that will be ignored by Drupal's file API.

@@ -1,19 +1,23 @@
 version: '2'
 services:
   drupal-server:
-    container_name: drupal-server
-    image: ncidockerhub.nci.nih.gov/webteam/drupal
+    container_name: evs
+    image: customcentdrupalserver
     ports:
-     - "8080:80"
+     - "8084:80"
     environment:
-      repository: $repository
-      hash_salt: $hash_salt
-      database: $database
-      username: $username
-      password: $password
-      host: $host
-      port: $port
+      CONTAINER_BRANCH_OR_TAG: upgrade
+      image_branch_or_tag: 1.1.17
+      load_database: 1
+      repository: "https://github.com/CBIIT/nci-evs"
+      hash_salt: k_7ame-GnEyWUYWKFJWIL0EjcwIZnf6UjVvT3YNgTxM6Rb2qUWNP8pOzxQ_Q29OtENOVGzMnHA
+      database: evs
+      username: root
+      password: my-secret-pw
+      host: 192.168.0.170 
+      port: 3308
       namespace: $namespace
-      driver: $driver
-
+      driver: mysql
+      ldap_port: 636
+      ldap_address: ldaps://nihdcadhub3.nih.gov
 
