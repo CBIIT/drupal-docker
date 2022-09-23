@@ -794,6 +794,7 @@ $settings['entity_update_batch_size'] = 50;
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 $config_directories['sync'] = '../config/sync';
+$settings["config_sync_directory"] = '../config';
 
 global $content_directories;
 #$content_directories['sync'] = $app_root.'/../content/sync';
