@@ -6,7 +6,7 @@ if [[ -z $repository ]]; then
     composer create-project drupal/recommended-project:9.2.6 site
 
     #composer create-project drupal-composer/drupal-project:8.x-dev /local/drupal/site --no-interaction
-    cd /local/drupal/site        
+    cd /local/drupal/site
     echo "installing drush"
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
     php composer-setup.php --install-dir=/usr/bin --filename=composer
@@ -56,14 +56,14 @@ else
         if [ -d "/local/drupal/site/docker/apache" ];then
             echo "Adding addition apache config files"
             cp /local/drupal/site/docker/apache/* /etc/httpd/conf.d
-        fi        
+        fi
         # name the cron job file drupal.cron #
         if [ -d "/local/drupal/site/docker/cron" ];then
             echo "Adding cronjob file"
             cp /local/drupal/site/docker/cron/drupal.cron /etc/cron.d
             chmod 0644 /etc/cron.d/drupal.cron
             crontab /etc/cron.d/drupal.cron
-        fi        
+        fi
         echo "*Setting up directory permissions"
         #chown -R root:apache /local/drupal
         chown -R drupaldocker:drupaldocker /local/drupal
@@ -93,11 +93,23 @@ else
         echo "Peform this after loading database or importing config"
         echo ""
         echo "* Setting up ldap server and port, turning on ldap_authentication"
-        drush cset ldap_servers.server.nci address $ldap_address -y
+
+        drupal_version=$(echo $(drush status | grep 'Drupal version') | sed 's/Drupal version : //')
+        if [[ $drupal_version = 9* ]]
+            then
+                ldap_address_no_ldaps=$(echo "$ldap_address"  | sed -r 's/ldaps:\/\///g')
+                drush cset ldap_servers.server.nci address $ldap_address_no_ldaps -y
+            else
+                drush cset ldap_servers.server.nci address $ldap_address -y
+        fi
         drush cset ldap_servers.server.nci port $ldap_port -y
         echo "* Enable ldap_authentication"
         drush pm-enable ldap_authentication -y
         drush cset ldap_authentication.settings sids.nci nci -y
+        drush cset ldap_authentication.settings skipAdministrators 0 -y
+        drush updb -y
+        drush updatedb --entity-updates -y
+        drush cr
         setup/setup_prod.sh
 
     fi
