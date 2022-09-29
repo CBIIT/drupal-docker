@@ -84,6 +84,10 @@ else
         echo "Adding drush commands in run.sh"
         cd /local/drupal/site
         if $load_database; then
+	    zipped_db=/local/drupal/site/database.sql.zip
+	    if [ -f "$zipped_db" ]; then
+    	        unzip $zipped_db
+	    fi
             echo "* Load Database"
             drush sql-cli < /local/drupal/site/database.sql
         else
