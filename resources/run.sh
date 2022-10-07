@@ -94,6 +94,10 @@ else
             echo "* Skipping Database Load"
         fi
 
+        if $local_build; then
+            sed -i 's/nci.nih.gov/localhost/g' /local/drupal/site/web/sites/default/services.yml        
+        fi
+
         echo "Peform this after loading database or importing config"
         echo ""
         echo "* Setting up ldap server and port, turning on ldap_authentication"
