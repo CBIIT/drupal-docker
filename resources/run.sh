@@ -94,10 +94,6 @@ else
             echo "* Skipping Database Load"
         fi
 
-        if $local_build; then
-            sed -i 's/nci.nih.gov/localhost/g' /local/drupal/site/web/sites/default/services.yml        
-        fi
-
         echo "Peform this after loading database or importing config"
         echo ""
         echo "* Setting up ldap server and port, turning on ldap_authentication"
@@ -135,6 +131,9 @@ else
 
 fi
 
+if [ -n "$local_build" ]; then
+    sed -i 's/nci.nih.gov/localhost/g' /local/drupal/site/web/sites/default/services.yml
+fi
 echo "redirecting apache logs to /dev/stderr and /dev/stdout to allow them to show up in docker log"
 ln -sf /dev/stderr /var/log/httpd/error.log
 ln -sf /dev/stdout /var/log/httpd/access.log
