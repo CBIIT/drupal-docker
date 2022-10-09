@@ -141,6 +141,6 @@ ln -sf /dev/stdout /var/log/httpd/access.log
 echo "starting crond"
 crond && tail -f /dev/null &
 echo "done starting crond"
-
+drush cr
 echo "start apache"
 exec httpd -DFOREGROUND
