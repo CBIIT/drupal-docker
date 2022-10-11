@@ -45,6 +45,22 @@ else
         else
             echo "* Skipping Database Load"
         fi
+        drupal_version=$(echo $(drush status | grep 'Drupal version') | sed 's/Drupal version : //')
+        if [[ $drupal_version = 9* ]]
+            then
+                ldap_address_no_ldaps=$(echo "$ldap_address"  | sed -r 's/ldaps:\/\///g')
+                drush cset ldap_servers.server.nci address $ldap_address_no_ldaps -y
+            else
+                drush cset ldap_servers.server.nci address $ldap_address -y
+        fi
+        drush cset ldap_servers.server.nci port $ldap_port -y
+        echo "* Enable ldap_authentication"
+        drush pm-enable ldap_authentication -y
+        drush cset ldap_authentication.settings sids.nci nci -y
+        drush cset ldap_authentication.settings skipAdministrators 0 -y
+        drush updb -y
+        drush updatedb --entity-updates -y
+        drush cr
     else
         ## If no repo we are installing a new site ##
         drush si --db-url=mysql://$dbuser:$dbpass@$dbhost:$dbport/$dbname --site-name=$sitename --account-name=$user --account-pass=$pass
