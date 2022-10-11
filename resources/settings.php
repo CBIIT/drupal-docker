@@ -752,6 +752,7 @@ $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
 $settings['trusted_host_patterns'] = array(
   '^nci\.nih\.gov$',
   '^.+\.nci\.nih\.gov$',
+  '^localhost$'
 );
 /**
  * The default list of directories that will be ignored by Drupal's file API.
@@ -792,11 +793,9 @@ $settings['entity_update_batch_size'] = 50;
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
-$config_directories['sync'] = '../config/sync';
+$settings["config_sync_directory"] = '../config';
 
 global $content_directories;
-#$content_directories['sync'] = $app_root.'/../content/sync';
-$content_directories['sync'] = '../content/sync';
 
 $databases['default']['default'] = array (
   'database' => getenv('database'),
