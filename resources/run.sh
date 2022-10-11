@@ -2,11 +2,11 @@
 user="${user:-admin}"
 pass="${pass:-admin}"
 
-dbname="${dbname:-$(echo $RANDOM | md5sum | head -c 20; echo;)}"
-dbhost="${dbhost:-localhost}"
-dbport="${dbport:-3306}"
-dbuser="${dbuser:-default}"
-dbpass="${dbpass:-default}"
+dbname="${database:-$(echo $RANDOM | md5sum | head -c 20; echo;)}"
+dbhost="${host:-localhost}"
+dbport="${port:-3306}"
+dbuser="${username:-default}"
+dbpass="${password:-default}"
 sitename="${sitename:-default}"
 FILE=/opt/drupal/installed
 
