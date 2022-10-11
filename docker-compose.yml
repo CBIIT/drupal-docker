@@ -15,6 +15,7 @@ services:
       dbname: drupal
       user: admin
       pass: 1234
+      local_build: "true"
     depends_on:
       mysql:
         condition: service_healthy

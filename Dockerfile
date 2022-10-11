@@ -36,7 +36,11 @@ RUN apk --no-cache add bash \
 COPY ./resources/httpd.conf /etc/apache2/httpd.conf
 COPY ./resources/run.sh /usr/bin
 COPY ./resources/000-default.conf /etc/apache2/conf.d
-COPY ./resources/.htaccess /opt/drupal
+COPY ./resources/.htaccess /tmp
+COPY resources/services.yml /tmp
+COPY resources/php.ini /etc
+COPY resources/settings.php /tmp
+
 RUN chmod 700 /usr/bin/run.sh
 WORKDIR /opt/drupal
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
