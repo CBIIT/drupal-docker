@@ -9,7 +9,7 @@ services:
     environment:
       sitename: webteam
       dbhost: mysql
-      dbport: 3309
+      dbport: 3306
       dbuser: mysql
       dbpass: 1234
       dbname: drupal
@@ -22,7 +22,7 @@ services:
     container_name: drupal-db
     image: mysql:5.7.39
     ports:
-     - "3309:3306"
+     - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: my-secret-pw
       MYSQL_USER: mysql
