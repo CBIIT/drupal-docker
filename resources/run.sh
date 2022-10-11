@@ -63,7 +63,7 @@ else
         drush cr
     else
         ## If no repo we are installing a new site ##
-        drush si --db-url=mysql://$dbuser:$dbpass@$dbhost:$dbport/$dbname --site-name=$sitename --account-name=$user --account-pass=$pass
+        drush si --db-url=mysql://$dbuser:$dbpass@$dbhost:$dbport/drupal --site-name=$sitename --account-name=$user --account-pass=$pass
     fi
 
 fi

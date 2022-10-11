@@ -9,6 +9,11 @@ RUN rm -rf /var/lib/apt/lists/*
 # update sources list
 RUN apk update
 RUN apk add --no-cache ca-certificates wget && update-ca-certificates
+RUN apk add openldap-back-mdb
+RUN apk add --update --virtual .build-deps openldap
+RUN apk --update --no-cache add libldap openldap-clients openldap openldap-back-mdb
+ARG DOCKER_PHP_ENABLE_LDAP
+
 
 # install basic apps, one per line for better caching
 RUN apk --no-cache add bash \
@@ -19,6 +24,7 @@ RUN apk --no-cache add bash \
     nano \
     sudo \
     tmux \
+    ldb-dev \
     php${PHP_VERSION}-apache2 \
     php${PHP_VERSION}-dom \
     php${PHP_VERSION}-gd \
@@ -33,6 +39,22 @@ RUN apk --no-cache add bash \
     php${PHP_VERSION}-tokenizer \
     php${PHP_VERSION}-xml \
     apache2-utils
+
+# Enable LDAP
+RUN if [ "${DOCKER_PHP_ENABLE_LDAP}" != "off" ]; then \
+      # Dependancy for ldap \
+      apk add --update --no-cache \
+          libldap && \
+      # Build dependancy for ldap \
+      apk add --update --no-cache --virtual .docker-php-ldap-dependancies \
+          openldap-dev && \
+      docker-php-ext-configure ldap && \
+      docker-php-ext-install ldap && \
+      apk del .docker-php-ldap-dependancies && \
+      php -m; \
+    else \
+      echo "Skip ldap support"; \
+    fi
 
 COPY ./resources/httpd.conf /etc/apache2/httpd.conf
 COPY ./resources/run.sh /usr/bin
