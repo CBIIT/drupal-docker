@@ -1,4 +1,4 @@
-version: '2'
+version: '3.9'
 services:
   drupal-server:
     container_name: drupal-server
@@ -8,11 +8,30 @@ services:
      - "8080:80"
     environment:
       sitename: webteam
-      dbhost: 192.168.0.170
-      dbport: 55002
+      dbhost: mysql
+      dbport: 3309
       dbuser: mysql
       dbpass: 1234
-      dbname: webteam
+      dbname: drupal
       user: admin
       pass: 1234
-
+    depends_on:
+      mysql:
+        condition: service_healthy
+  mysql:
+    container_name: drupal-db
+    image: mysql:5.7.39
+    ports:
+     - "3309:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: drupal
+    command: [--max-allowed-packet=67108864]
+    healthcheck:
+      test: "mysqladmin -umysql -p1234 ping"
+      interval: 10s
+      timeout: 5s
+      retries: 30
+    restart: always
