@@ -62,7 +62,6 @@ COPY ./resources/run.sh /usr/bin
 COPY ./resources/000-default.conf /etc/apache2/conf.d
 COPY ./resources/.htaccess /tmp
 COPY ./resources/ldap.conf /etc/openldap
-COPY ./resources/php.ini /etc/php8
 COPY resources/services.yml /tmp
 COPY resources/settings.php /tmp
 
@@ -75,7 +74,7 @@ COPY ./resources/composer.json /opt/drupal
 RUN composer --no-interaction require drush/drush:^10 --prefer-dist
 RUN composer --no-interaction update
 WORKDIR /opt/drupal/web
-
+RUN echo 'memory_limit = -1' >> /usr/local/etc/php/conf.d/docker-php-ram-limit.ini
 ENTRYPOINT run.sh
 
 
