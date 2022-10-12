@@ -61,6 +61,7 @@ COPY ./resources/httpd.conf /etc/apache2/httpd.conf
 COPY ./resources/run.sh /usr/bin
 COPY ./resources/000-default.conf /etc/apache2/conf.d
 COPY ./resources/.htaccess /tmp
+COPY ./resources/ldap.conf /etc/openldap
 COPY ./resources/php.ini /etc/php8
 COPY resources/services.yml /tmp
 COPY resources/settings.php /tmp
