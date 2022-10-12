@@ -22,6 +22,7 @@ RUN apk --no-cache add bash \
     mariadb-client \
     openssh \
     nano \
+    patch \
     sudo \
     tmux \
     ldb-dev \
