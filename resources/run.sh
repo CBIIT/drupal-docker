@@ -67,7 +67,7 @@ else
     fi
 
 fi
-
+drush cr
 #Start Apache
 if [ -n "$local_build" ]; then
     sed -i 's/nci.nih.gov/localhost/g' /opt/drupal/web/sites/default/services.yml
