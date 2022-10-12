@@ -36,7 +36,7 @@ else
         touch /opt/drupal/installed
         chown -R apache:apache /opt/drupal
         if $load_database; then
-	        zipped_db=/local/drupal/site/database.sql.zip
+	        zipped_db=/opt/drupal/database.sql.zip
 	    if [ -f "$zipped_db" ]; then
     	    unzip $zipped_db
 	    fi
