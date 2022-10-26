@@ -63,6 +63,10 @@ else
         drush cr
     else
         ## If no repo we are installing a new site ##
+        mysql -u$dbuser -p$dbpass -h$dbhost -P$dbport -e "drop database $dbname"
+        mysql -u$dbuser -p$dbpass -h$dbhost -P$dbport -e "create database $dbname"
+        cp /tmp/services.yml /opt/drupal/web/sites/default
+        cp /tmp/settings.php /opt/drupal/web/sites/default
         drush si --db-url=mysql://$dbuser:$dbpass@$dbhost:$dbport/drupal --site-name=$sitename --account-name=$user --account-pass=$pass
     fi
 
