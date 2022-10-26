@@ -67,7 +67,9 @@ else
         mysql -u$dbuser -p$dbpass -h$dbhost -P$dbport -e "create database $dbname"
         cp /tmp/services.yml /opt/drupal/web/sites/default
         cp /tmp/settings.php /opt/drupal/web/sites/default
-        drush si --db-url=mysql://$dbuser:$dbpass@$dbhost:$dbport/$dbname --site-name=$dbname --account-name=$user --account-pass=$pass
+        drush -y si --db-url=mysql://$dbuser:$dbpass@$dbhost:$dbport/$dbname --site-name=$dbname --account-name=$user --account-pass=$pass
+        chown -R apache:apache /opt/drupal
+
     fi
 
 fi
