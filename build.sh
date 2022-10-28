@@ -17,4 +17,5 @@ docker rmi ncidockerhub.nci.nih.gov/webteam/drupal:$TAG
 docker rmi temp_drupal:latest
 
 
+
 docker image prune -f
