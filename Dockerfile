@@ -1,5 +1,5 @@
 FROM drupal:9.4.8-php8.1-fpm-alpine3.16
-ENV PHP_VERSION=8
+ENV PHP_VERSION=81
 RUN sh
 RUN chmod 1777 /tmp
 RUN chmod -R 1777 /var/tmp
