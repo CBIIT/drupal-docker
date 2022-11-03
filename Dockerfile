@@ -39,7 +39,7 @@ RUN apk --no-cache add bash \
     php${PHP_VERSION}-tokenizer \
     php${PHP_VERSION}-xml \
     apache2-utils
-
+RUN apk upgrade
 # Enable LDAP
 RUN if [ "${DOCKER_PHP_ENABLE_LDAP}" != "off" ]; then \
       # Dependancy for ldap \
