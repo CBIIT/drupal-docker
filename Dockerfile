@@ -30,6 +30,7 @@ RUN apk --no-cache add bash \
     php${PHP_VERSION}-gd \
     php${PHP_VERSION}-json \
     php${PHP_VERSION}-mbstring \
+    php${PHP_VERSION}-mysqli \
     php${PHP_VERSION}-ldap \
     php${PHP_VERSION}-opcache \
     php${PHP_VERSION}-pdo \
