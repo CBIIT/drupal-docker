@@ -35,13 +35,13 @@ else
         cp /tmp/.htaccess /opt/drupal
         touch /opt/drupal/installed
         chown -R apache:apache /opt/drupal
-	if [ -d "/local/drupal/site/docker/apache" ];then
+	if [ -d "/opt/drupal/docker/apache" ];then
 		echo "Adding addition apache config files"
-		cp /local/drupal/site/docker/apache/* /etc/apache2/conf.d
+		cp /opt/drupal/docker/apache/* /etc/apache2/conf.d
 	fi	
-        if [ -d "/local/drupal/site/docker/cron" ];then
+        if [ -d "/opt/drupal/docker/cron" ];then
             echo "Adding cronjob file"
-            cp /local/drupal/site/docker/cron/drupal.cron /etc/cron.d
+            cp /opt/drupal/docker/cron/drupal.cron /etc/cron.d
             chmod 0644 /etc/cron.d/drupal.cron
             crontab /etc/cron.d/drupal.cron
         fi	
