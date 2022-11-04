@@ -17,6 +17,7 @@ ARG DOCKER_PHP_ENABLE_LDAP
 # install basic apps, one per line for better caching
 RUN apk --no-cache add bash \
     curl \
+    cronie \
     git \
     mariadb-client \
     openssh \
