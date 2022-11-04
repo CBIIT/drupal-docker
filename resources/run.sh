@@ -35,6 +35,10 @@ else
         cp /tmp/.htaccess /opt/drupal
         touch /opt/drupal/installed
         chown -R apache:apache /opt/drupal
+	if [ -d "/local/drupal/site/docker/apache" ];then
+		echo "Adding addition apache config files"
+		cp /local/drupal/site/docker/apache/* /etc/apache2/conf.d
+	fi	
         if $load_database; then
 	        zipped_db=/opt/drupal/database.sql.zip
 	    if [ -f "$zipped_db" ]; then
