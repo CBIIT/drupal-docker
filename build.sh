@@ -1,8 +1,8 @@
 #!/bin/bash
-TAG="1.1.11"
+TAG="alpine-1.1"
 echo $TAG
 echo "building drupal image"
-docker build --no-cache  ./ -t temp_drupal
+docker build --no-cache -t temp_drupal .
 
 echo "tagging drupal image"
 docker tag temp_drupal:latest ncidockerhub.nci.nih.gov/webteam/drupal:$TAG
