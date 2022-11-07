@@ -8,10 +8,10 @@ RUN rm -rf /var/lib/apt/lists/*
 # update sources list
 RUN apk update
 RUN apk add --no-cache ca-certificates wget && update-ca-certificates
-COPY ./resources/CA.cer /usr/local/share/ca-certificates/CA.crt
-COPY ./resources/ROOT.cer /usr/local/share/ca-certificates/ROOT.crt
-RUN cat /usr/local/share/ca-certificates/CA.crt >> /etc/ssl/certs/ca-certificates.crt
-RUN cat /usr/local/share/ca-certificates/ROOT.crt >> /etc/ssl/certs/ca-certificates.crt
+#COPY ./resources/CA.cer /usr/local/share/ca-certificates/CA.crt
+#COPY ./resources/ROOT.cer /usr/local/share/ca-certificates/ROOT.crt
+#RUN cat /usr/local/share/ca-certificates/CA.crt >> /etc/ssl/certs/ca-certificates.crt
+#RUN cat /usr/local/share/ca-certificates/ROOT.crt >> /etc/ssl/certs/ca-certificates.crt
 RUN apk --no-cache add curl
 
 RUN apk add openldap-back-mdb
