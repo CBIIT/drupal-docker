@@ -37,7 +37,10 @@ else
         chown -R apache:apache /opt/drupal
 	if [ -d "/opt/drupal/docker/apache" ];then
 		echo "Adding addition apache config files"
-		cp /opt/drupal/docker/apache/* /etc/apache2/conf.d
+		cp /opt/drupal/docker/apache/*.conf /etc/apache2/conf.d
+		if [ -f "/opt/drupal/docker/apache/footer.html" ]; then
+			cp /opt/drupal/docker/apache/footer.html /mnt/s3fs/ftp1
+		fi
 	fi	
         if [ -d "/opt/drupal/docker/cron" ];then
             echo "Adding cronjob file"
