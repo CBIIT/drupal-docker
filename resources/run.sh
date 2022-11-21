@@ -10,8 +10,8 @@ dbpass="${password:-default}"
 sitename="${sitename:-default}"
 FILE=/opt/drupal/installed
 echo "Adding drupaldocker user"
-groupadd -g 3000 drupaldocker
-useradd -c "" -d /home/drupaldocker -s /bin/bash -g 3000 -u 3000 drupaldocker
+addgroup -g 3000 drupaldocker
+adduser -c "" -d /home/drupaldocker -s /bin/bash -g 3000 -u 3000 drupaldocker
 if [ -f "$FILE" ]; then
     echo "Drupal Site Already Installed"
 else
