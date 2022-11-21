@@ -9,7 +9,9 @@ dbuser="${username:-default}"
 dbpass="${password:-default}"
 sitename="${sitename:-default}"
 FILE=/opt/drupal/installed
-
+echo "Adding drupaldocker user"
+groupadd -g 3000 drupaldocker
+useradd -c "" -d /home/drupaldocker -s /bin/bash -g 3000 -u 3000 drupaldocker
 if [ -f "$FILE" ]; then
     echo "Drupal Site Already Installed"
 else
@@ -26,7 +28,7 @@ else
         git checkout $branchOrTag
         mkdir /opt/drupal/web/sites/files
         mkdir /opt/drupal/web/sites/files/config
-        chown -R apache:apache /opt/drupal/web/sites/files
+        chown -R drupaldocker:drupaldocker /opt/drupal/web/sites/files
 
         composer install
 
@@ -34,7 +36,7 @@ else
         cp /tmp/services.yml /opt/drupal/web/sites/default
         cp /tmp/.htaccess /opt/drupal
         touch /opt/drupal/installed
-        chown -R apache:apache /opt/drupal
+        chown -R drupaldocker:drupaldocker /opt/drupal
 	if [ -d "/opt/drupal/docker/apache" ];then
 		echo "Adding addition apache config files"
 		cp /opt/drupal/docker/apache/*.conf /etc/apache2/conf.d
@@ -81,7 +83,7 @@ else
         cp /tmp/services.yml /opt/drupal/web/sites/default
         cp /tmp/settings.php /opt/drupal/web/sites/default
         drush -y si --db-url=mysql://$dbuser:$dbpass@$dbhost:$dbport/$dbname --site-name=$dbname --account-name=$user --account-pass=$pass
-        chown -R apache:apache /opt/drupal
+        chown -R drupaldocker:drupaldocker /opt/drupal
 
     fi
 
