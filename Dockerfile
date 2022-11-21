@@ -45,6 +45,7 @@ RUN apk --no-cache add bash \
     php${PHP_VERSION}-simplexml \
     php${PHP_VERSION}-tokenizer \
     php${PHP_VERSION}-xml \
+    php${PHP_VERSION}-xmlwriter \
     apache2-utils \
     apache2-icons
 RUN apk upgrade
