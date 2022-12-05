@@ -45,9 +45,7 @@ RUN apk --no-cache add bash \
     php${PHP_VERSION}-simplexml \
     php${PHP_VERSION}-tokenizer \
     php${PHP_VERSION}-xml \
-    php${PHP_VERSION}-xmlwriter \
-    apache2-utils \
-    apache2-icons
+    apache2-utils
 RUN apk upgrade
 # Enable LDAP
 RUN if [ "${DOCKER_PHP_ENABLE_LDAP}" != "off" ]; then \
@@ -72,7 +70,7 @@ COPY ./resources/.htaccess /tmp
 COPY ./resources/ldap.conf /etc/openldap
 COPY resources/services.yml /tmp
 COPY resources/settings.php /tmp
-
+COPY resources/00_php.ini /etc/php$PHP_VERSION/conf.d
 RUN chmod 700 /usr/bin/run.sh
 WORKDIR /opt/drupal
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
