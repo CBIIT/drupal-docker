@@ -9,6 +9,7 @@ dbuser="${username:-default}"
 dbpass="${password:-default}"
 sitename="${sitename:-default}"
 FILE=/opt/drupal/installed
+POST_INSTALL_SCRIPT=/opt/drupal/docker/scripts/install.sh
 echo "Adding drupaldocker user"
 addgroup -g 3000 drupaldocker
 adduser -S -D -u  3000 -s /bin/bash  -h /home/drupaldocker -G drupaldocker drupaldocker
@@ -76,6 +77,10 @@ else
         drush updb -y
         drush updatedb --entity-updates -y
         drush cr
+        if [ -f "/opt/drupal/docker/scripts/install.sh" ];then                                      
+            echo "Executing post install script"                                                    
+            "$POST_INSTALL_SCRIPT"                                                                  
+        fi    
     else
         ## If no repo we are installing a new site ##
         mysql -u$dbuser -p$dbpass -h$dbhost -P$dbport -e "drop database $dbname"
