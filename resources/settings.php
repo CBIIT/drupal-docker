@@ -555,7 +555,7 @@ if ($settings['hash_salt']) {
  * about securing private files.
  */
 //$settings['file_private_path'] = '/local/drupal/site/private-files';
-$settings['file_private_path'] = '/mnt/s3fs';
+$settings['file_private_path'] = '/mnt/s3fs/private';
 
 /**
  * Session write interval:
