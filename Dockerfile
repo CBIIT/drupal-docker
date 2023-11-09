@@ -15,6 +15,7 @@ RUN apk add --no-cache ca-certificates wget && update-ca-certificates
 RUN apk --no-cache add curl
 
 RUN apk add openldap-back-mdb
+RUN apk add --no-cache nodejs npm
 RUN apk add --update --virtual .build-deps openldap
 RUN apk --update --no-cache add libldap openldap-clients openldap openldap-back-mdb
 ARG DOCKER_PHP_ENABLE_LDAP

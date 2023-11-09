@@ -32,6 +32,8 @@ else
         chown -R drupaldocker:drupaldocker /opt/drupal/web/sites/files
 
         composer install
+        npm install --save-dev webpack-cli
+        npm start
 
         cp /tmp/settings.php /opt/drupal/web/sites/default
         cp /tmp/services.yml /opt/drupal/web/sites/default
