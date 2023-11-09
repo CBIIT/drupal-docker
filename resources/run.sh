@@ -32,6 +32,7 @@ else
         chown -R drupaldocker:drupaldocker /opt/drupal/web/sites/files
 
         composer install
+	cd /opt/drupal/web/themes/custom/ncids-theme
         npm install --save-dev webpack-cli
         npm start
 
