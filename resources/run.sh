@@ -94,7 +94,8 @@ else
         chown -R drupaldocker:drupaldocker /opt/drupal
 
     fi
-
+drush urol administrator admin
+drush upwd admin 1234
 fi
 #Start Apache
 if [ -n "$local_build" ]; then
