@@ -7,11 +7,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 # update sources list
 RUN apk update
-RUN apk add --no-cache ca-certificates wget && update-ca-certificates
-#COPY ./resources/CA.cer /usr/local/share/ca-certificates/CA.crt
-#COPY ./resources/ROOT.cer /usr/local/share/ca-certificates/ROOT.crt
-#RUN cat /usr/local/share/ca-certificates/CA.crt >> /etc/ssl/certs/ca-certificates.crt
-#RUN cat /usr/local/share/ca-certificates/ROOT.crt >> /etc/ssl/certs/ca-certificates.crt
+RUN apk add --no-cache wget
 RUN apk --no-cache add curl
 
 RUN apk add openldap-back-mdb
@@ -73,14 +69,6 @@ COPY resources/settings.php /tmp
 COPY resources/00_php.ini /etc/php$PHP_VERSION/conf.d
 RUN chmod 700 /usr/bin/run.sh
 WORKDIR /opt/drupal
-#RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-#RUN php composer-setup.php --install-dir=/usr/bin --filename=composer
-#COPY ./resources/composer.json /opt/drupal
-
-#RUN composer --no-interaction require drush/drush:^10 --prefer-dist
-#RUN composer --no-interaction update
 WORKDIR /opt/drupal/web
 RUN echo 'memory_limit = -1' >> /usr/local/etc/php/conf.d/docker-php-ram-limit.ini
 ENTRYPOINT run.sh
-
-
