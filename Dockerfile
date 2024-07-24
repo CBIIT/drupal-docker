@@ -1,5 +1,5 @@
-FROM drupal:9.5.10-php8.1-fpm-alpine3.18
-ENV PHP_VERSION=81
+FROM drupal:php8.3-fpm-alpine3.19
+ENV PHP_VERSION=83
 RUN sh
 RUN chmod 1777 /tmp
 RUN chmod -R 1777 /var/tmp
@@ -73,12 +73,12 @@ COPY resources/settings.php /tmp
 COPY resources/00_php.ini /etc/php$PHP_VERSION/conf.d
 RUN chmod 700 /usr/bin/run.sh
 WORKDIR /opt/drupal
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-RUN php composer-setup.php --install-dir=/usr/bin --filename=composer
-COPY ./resources/composer.json /opt/drupal
+#RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+#RUN php composer-setup.php --install-dir=/usr/bin --filename=composer
+#COPY ./resources/composer.json /opt/drupal
 
-RUN composer --no-interaction require drush/drush:^10 --prefer-dist
-RUN composer --no-interaction update
+#RUN composer --no-interaction require drush/drush:^10 --prefer-dist
+#RUN composer --no-interaction update
 WORKDIR /opt/drupal/web
 RUN echo 'memory_limit = -1' >> /usr/local/etc/php/conf.d/docker-php-ram-limit.ini
 ENTRYPOINT run.sh
