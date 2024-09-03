@@ -32,7 +32,7 @@ else
         chown -R drupaldocker:drupaldocker /opt/drupal/web/sites/files
         if [ -d "/opt/files" ]; then
  		rm -rf /opt/drupal/web/sites/default/files
-        	ln -s /opt/files /opt/drupal/web/sites/dwfault/files
+        	ln -s /opt/files /opt/drupal/web/sites/default/files
         fi
         composer install
 
