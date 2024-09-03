@@ -27,9 +27,6 @@ else
         git clone $repository drupal
         cd drupal
         git checkout $branchOrTag
-        mkdir /opt/drupal/web/sites/files
-        mkdir /opt/drupal/web/sites/files/config
-        chown -R drupaldocker:drupaldocker /opt/drupal/web/sites/files
 
         composer install
 
