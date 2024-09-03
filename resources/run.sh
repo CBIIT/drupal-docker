@@ -30,7 +30,10 @@ else
         mkdir /opt/drupal/web/sites/files
         mkdir /opt/drupal/web/sites/files/config
         chown -R drupaldocker:drupaldocker /opt/drupal/web/sites/files
-
+        if [ -d "/opt/files" ]; then
+ 		rm -rf /opt/drupal/web/sites/default/files
+        	ln -s /opt/files /opt/drupal/web/sites/dwfault/files
+        fi
         composer install
 
         cp /tmp/settings.php /opt/drupal/web/sites/default
