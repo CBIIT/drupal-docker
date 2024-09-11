@@ -1,5 +1,2 @@
 #Remove MAC files
 .DS_Store
-
-#Remove JetBrains
-.idea/
