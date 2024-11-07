@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:latest
 ARG code_path=/tmp/github
 ARG drupal_root=/var/www/drupal
 ENV code_path=$code_path
