@@ -11,7 +11,6 @@ RUN apk add git curl openldap openldap-clients composer \
 RUN mkdir -p /var/www/drupal
 RUN ln -s $drupal_root/vendor/bin/drush /usr/bin/drush
 RUN composer require aws/aws-sdk-php
-COPY installdrupal.sh /usr/bin
 COPY memory.ini /etc/php83/conf.d
 COPY 00_filesize.ini /etc/php83/conf.d
 COPY entrypoint.sh /usr/bin
