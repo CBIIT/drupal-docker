@@ -1,4 +1,4 @@
-FROM drupal:php8.3-fpm-alpine3.19
+FROM drupal:php8.3-fpm-alpine3.21
 ENV PHP_VERSION=83
 RUN sh
 RUN chmod 1777 /tmp
