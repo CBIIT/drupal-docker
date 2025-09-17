@@ -1,4 +1,4 @@
-FROM drupal:php8.3-fpm-alpine3.21
+FROM drupal:php8.3-fpm-alpine3.22
 ENV PHP_VERSION=83
 RUN sh
 RUN chmod 1777 /tmp
@@ -26,7 +26,7 @@ RUN apk --no-cache add bash \
     patch \
     sudo \
     tmux \
-    ldb-dev \
+    ldb \
     php${PHP_VERSION}-apache2 \
     php${PHP_VERSION}-dom \
     php${PHP_VERSION}-gd \
