@@ -41,8 +41,8 @@ WORKDIR ${drupal_root}
 EXPOSE 80
 
 # Valid healthcheck flags (removed unsupported --start-interval)
-HEALTHCHECK --interval=5m --timeout=10s --start-period=3m --retries=3 \
-  CMD curl -fsS http://127.0.0.1:80/ || exit 1
+HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=4 \
+  CMD curl -sS -o /dev/null http://127.0.0.1:80/ || exit 1
 
 # Run Apache in foreground (the "&" is unnecessary and harmful in JSON CMD)
 CMD ["httpd", "-D", "FOREGROUND"]
