@@ -4,7 +4,7 @@ FROM drupal:php8.3-fpm-alpine3.22
 ENV PHP_VERSION=83
 ENV PHP_INI_DIR=/etc/php83
 
-# Update repositories to edge so we can pull php83=8.3.25
+# Update repositories to edge so we can pull php83=8.3.26
 RUN set -eux; \
     echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
     echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories; \
@@ -28,22 +28,22 @@ RUN apk add --no-cache \
     openldap-back-mdb \
     apache2-utils
 
-# PHP 8.3.25 + extensions (pin exact version to 8.3.25-r0)
+# PHP 8.3.26 + extensions (pin exact version to 8.3.26-r0)
 RUN set -eux; apk add --no-cache \
-    php83=8.3.25-r0 \
-    php83-fpm=8.3.25-r0 \
-    php83-opcache=8.3.25-r0 \
-    php83-mysqli=8.3.25-r0 \
-    php83-pdo_mysql=8.3.25-r0 \
-    php83-ldap=8.3.25-r0 \
-    php83-gd=8.3.25-r0 \
-    php83-xml=8.3.25-r0 \
-    php83-dom=8.3.25-r0 \
-    php83-simplexml=8.3.25-r0 \
-    php83-tokenizer=8.3.25-r0 \
-    php83-session=8.3.25-r0
+    php83=8.3.26-r0 \
+    php83-fpm=8.3.26-r0 \
+    php83-opcache=8.3.26-r0 \
+    php83-mysqli=8.3.26-r0 \
+    php83-pdo_mysql=8.3.26-r0 \
+    php83-ldap=8.3.26-r0 \
+    php83-gd=8.3.26-r0 \
+    php83-xml=8.3.26-r0 \
+    php83-dom=8.3.26-r0 \
+    php83-simplexml=8.3.26-r0 \
+    php83-tokenizer=8.3.26-r0 \
+    php83-session=8.3.26-r0
 
-# Point Drupal base image paths to Alpine’s PHP 8.3.25
+# Point Drupal base image paths to Alpine’s PHP 8.3.26
 RUN set -eux; \
     mkdir -p /usr/local/etc; \
     ln -sf /etc/php83 /usr/local/etc/php; \
