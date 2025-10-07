@@ -39,6 +39,7 @@ RUN apk add --no-cache git curl openldap openldap-clients composer \
     php83-pdo \
     php83-session \
     php83-simplexml \
+    php83-tokenizer \
     php83-xml    
 
 RUN mkdir -p /var/www/drupal /run/apache2
