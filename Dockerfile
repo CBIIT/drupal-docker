@@ -1,12 +1,13 @@
 FROM alpine:latest
 
 # Enable edge repos so php83=8.3.25-r0 is available
-RUN set -eux; \
-  echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
-  echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories; \
-  apk update
+# RUN set -eux; \
+#   echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
+#   echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories;
+RUN apk update
 
 ARG code_path=/tmp/github
+ARG phpversion=8.3
 ARG drupal_root=/var/www/drupal
 ENV code_path=${code_path}
 ENV drupal_root=${drupal_root}
@@ -14,19 +15,31 @@ ENV drupal_root=${drupal_root}
 # Install deps + PHP 8.3.25 (pinned)
 RUN apk add --no-cache git curl openldap openldap-clients composer \
     patch vim mariadb-client postfix \
-    php83=8.3.25-r0 \
-    php83-ldap=8.3.25-r0 \
-    php83-apache2=8.3.25-r0 \
-    php83-opcache=8.3.25-r0 \
-    php83-mysqli=8.3.25-r0 \
-    php83-pdo_mysql=8.3.25-r0 \
-    php83-tokenizer=8.3.25-r0 \
-    php83-dom=8.3.25-r0 \
-    php83-gd=8.3.25-r0 \
-    php83-pdo=8.3.25-r0 \
-    php83-session=8.3.25-r0 \
-    php83-simplexml=8.3.25-r0 \
-    php83-xml=8.3.25-r0
+    # php83=${phpversion} \
+    # php83-ldap=${phpversion} \
+    # php83-apache2=${phpversion} \
+    # php83-opcache=${phpversion} \
+    # php83-mysqli=${phpversion} \
+    # php83-pdo_mysql=${phpversion} \
+    # php83-tokenizer=${phpversion} \
+    # php83-dom=${phpversion} \
+    # php83-gd=${phpversion} \
+    # php83-pdo=${phpversion} \
+    # php83-session=${phpversion} \
+    # php83-simplexml=${phpversion} \
+    # php83-xml=${phpversion}
+    php83 \
+    php83-ldap \
+    php83-apache2 \
+    php83-opcache \
+    php83-mysqli \
+    php83-pdo_mysql \
+    php83-dom \
+    php83-gd \
+    php83-pdo \
+    php83-session \
+    php83-simplexml \
+    php83-xml    
 
 RUN mkdir -p /var/www/drupal /run/apache2
 RUN ln -sf ${drupal_root}/vendor/bin/drush /usr/bin/drush
