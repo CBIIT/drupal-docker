@@ -7,7 +7,7 @@ FROM alpine:latest
 RUN apk update
 
 ARG code_path=/tmp/github
-ARG phpversion=8.3
+ARG phpversion=8.4
 ARG drupal_root=/var/www/drupal
 ENV code_path=${code_path}
 ENV drupal_root=${drupal_root}
@@ -28,19 +28,19 @@ RUN apk add --no-cache git curl openldap openldap-clients composer \
     # php83-session=${phpversion} \
     # php83-simplexml=${phpversion} \
     # php83-xml=${phpversion}
-    php83 \
-    php83-ldap \
-    php83-apache2 \
-    php83-opcache \
-    php83-mysqli \
-    php83-pdo_mysql \
-    php83-dom \
-    php83-gd \
-    php83-pdo \
-    php83-session \
-    php83-simplexml \
-    php83-tokenizer \
-    php83-xml    
+    php84 \
+    php84-ldap \
+    php84-apache2 \
+    php84-opcache \
+    php84-mysqli \
+    php84-pdo_mysql \
+    php84-dom \
+    php84-gd \
+    php84-pdo \
+    php84-session \
+    php84-simplexml \
+    php84-tokenizer \
+    php84-xml    
 
 RUN mkdir -p /var/www/drupal /run/apache2
 RUN ln -sf ${drupal_root}/vendor/bin/drush /usr/bin/drush
