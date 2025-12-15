@@ -9,6 +9,7 @@ ENV code_path=${code_path}
 ENV drupal_root=${drupal_root}
 
 RUN apk add --no-cache \
+  curl \
   php84 \
   php84-apache2 \
   php84-opcache \
