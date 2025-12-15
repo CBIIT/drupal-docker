@@ -9,6 +9,12 @@ ENV code_path=${code_path}
 ENV drupal_root=${drupal_root}
 
 RUN apk add --no-cache \
+  openldap \
+  openldap-clients \
+  patch \
+  vim \
+  mariadb-client \
+  postfix \
   curl \
   php84 \
   php84-apache2 \
