@@ -1,41 +1,46 @@
 FROM alpine:latest
 
+# Enable edge repos so php84=8.3.25-r0 is available
+# RUN set -eux; \
+#   echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
+#   echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories;
 RUN apk update
-
 ARG code_path=/tmp/github
-ARG phpversion=8.4
+ARG phpversion=8.3
 ARG drupal_root=/var/www/drupal
 ENV code_path=${code_path}
 ENV drupal_root=${drupal_root}
 
-RUN apk add --no-cache \
-  openldap \
-  openldap-clients \
-  patch \
-  vim \
-  mariadb-client \
-  postfix \
-  curl \
-  php84 \
-  php84-apache2 \
-  php84-opcache \
-  php84-mysqli \
-  php84-pdo_mysql \
-  php84-ldap \
-  php84-dom \
-  php84-gd \
-  php84-tokenizer \
-  php84-session \
-  php84-simplexml \
-  php84-xml \
-  php84-pecl-redis \
-  php84-phar \
-  php84-iconv \
-  php84-openssl
-  
-RUN curl -sS https://getcomposer.org/installer \
-  | php84 -- --install-dir=/usr/local/bin --filename=composer
-    
+# Install deps + PHP 8.3.25 (pinned)
+RUN apk add --no-cache git curl openldap openldap-clients composer \
+    patch vim mariadb-client postfix \
+    # php84=${phpversion} \
+    # php84-ldap=${phpversion} \
+    # php84-apache2=${phpversion} \
+    # php84-opcache=${phpversion} \
+    # php84-mysqli=${phpversion} \
+    # php84-pdo_mysql=${phpversion} \
+    # php84-tokenizer=${phpversion} \
+    # php84-dom=${phpversion} \
+    # php84-gd=${phpversion} \
+    # php84-pdo=${phpversion} \
+    # php84-session=${phpversion} \
+    # php84-simplexml=${phpversion} \
+    # php84-xml=${phpversion}
+    php84 \
+    php84-ldap \
+    php84-apache2 \
+    php84-opcache \
+    php84-mysqli \
+    php84-pdo_mysql \
+    php84-dom \
+    php84-gd \
+    php84-pdo \
+    php84-session \
+    php84-simplexml \
+    php84-tokenizer \
+    php84-xml
+
 RUN mkdir -p /var/www/drupal /run/apache2
 RUN ln -sf ${drupal_root}/vendor/bin/drush /usr/bin/drush
 RUN composer require aws/aws-sdk-php
