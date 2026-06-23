@@ -31,8 +31,8 @@ RUN mkdir -p /var/www/drupal /run/apache2
 RUN ln -sf ${drupal_root}/vendor/bin/drush /usr/bin/drush
 RUN composer require aws/aws-sdk-php
 
-COPY memory.ini /etc/php84/conf.d/
-COPY 00_filesize.ini /etc/php84/conf.d/
+COPY memory.ini /etc/php85/conf.d/
+COPY 00_filesize.ini /etc/php85/conf.d/
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 
