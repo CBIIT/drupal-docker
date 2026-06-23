@@ -1,4 +1,4 @@
-FROM alpine:3.22
+FROM alpine:latest
 
 # Enable edge repos so php84=8.3.25-r0 is available
 # RUN set -eux; \
@@ -27,19 +27,19 @@ RUN apk add --no-cache git curl openldap openldap-clients composer \
     # php84-session=${phpversion} \
     # php84-simplexml=${phpversion} \
     # php84-xml=${phpversion}
-    php84 \
-    php84-ldap \
-    php84-apache2 \
-    php84-opcache \
-    php84-mysqli \
-    php84-pdo_mysql \
-    php84-dom \
-    php84-gd \
-    php84-pdo \
-    php84-session \
-    php84-simplexml \
-    php84-tokenizer \
-    php84-xml
+    php85 \
+    php85-ldap \
+    php85-apache2 \
+    php85-opcache \
+    php85-mysqli \
+    php85-pdo_mysql \
+    php85-dom \
+    php85-gd \
+    php85-pdo \
+    php85-session \
+    php85-simplexml \
+    php85-tokenizer \
+    php85-xml
 
 RUN mkdir -p /var/www/drupal /run/apache2
 RUN ln -sf ${drupal_root}/vendor/bin/drush /usr/bin/drush
