@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.22
 
 # Enable edge repos so php84=8.3.25-r0 is available
 # RUN set -eux; \
