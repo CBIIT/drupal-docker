@@ -14,23 +14,9 @@ ENV drupal_root=${drupal_root}
 # Install deps + PHP 8.3.25 (pinned)
 RUN apk add --no-cache git curl openldap openldap-clients composer \
     patch vim mariadb-client postfix \
-    # php84=${phpversion} \
-    # php84-ldap=${phpversion} \
-    # php84-apache2=${phpversion} \
-    # php84-opcache=${phpversion} \
-    # php84-mysqli=${phpversion} \
-    # php84-pdo_mysql=${phpversion} \
-    # php84-tokenizer=${phpversion} \
-    # php84-dom=${phpversion} \
-    # php84-gd=${phpversion} \
-    # php84-pdo=${phpversion} \
-    # php84-session=${phpversion} \
-    # php84-simplexml=${phpversion} \
-    # php84-xml=${phpversion}
     php85 \
     php85-ldap \
     php85-apache2 \
-    php85-opcache \
     php85-mysqli \
     php85-pdo_mysql \
     php85-dom \
