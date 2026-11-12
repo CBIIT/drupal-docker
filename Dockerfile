@@ -4,7 +4,8 @@ FROM alpine:latest
 # RUN set -eux; \
 #   echo "https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
 #   echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories;
-RUN apk update
+RUN apk upgrade --no-cache
+
 ARG code_path=/tmp/github
 ARG phpversion=8.3
 ARG drupal_root=/var/www/drupal
